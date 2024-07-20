@@ -1,0 +1,48 @@
+.vrsSearchResult {
+  background-color: $colorEmptyShade;
+  display: block;
+  padding: $sizeS $sizeL $sizeS $sizeL;
+  text-decoration: none;
+  border-bottom: 1px solid $borderColorLight;
+
+  &:hover {
+    background-color: $colorLightShade;
+  }
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.vrsSearchResult-isLink {
+  padding-left: $sizeM;
+  border-left: $sizeS solid $colorEmptyShade;
+
+  &:hover,
+  &.isSelected {
+    border-left: $sizeS solid $colorPrimary;
+
+    .vrsSearchResultTitle {
+      text-decoration: underline;
+    }
+  }
+
+  .vrsSearchResultTitle {
+    color: $colorPrimary;
+  }
+}
+
+.vrsSearchResultTitle {
+  color: $colorDarkerShade;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 22px;
+  margin-bottom: $sizeXxs;
+}
+
+.vrsSearchResultSnippet {
+  color: $colorDarkerShade;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 0;
+}

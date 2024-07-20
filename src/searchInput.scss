@@ -1,0 +1,44 @@
+.vrsSearchForm {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.vrsSearchInput {
+  flex-grow: 1;
+  padding: $sizeL;
+  background-color: $colorEmptyShade;
+  border: none;
+  box-shadow: $shadowSmallStart;
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: transparent;
+  outline-offset: -1px;
+  font-size: $fontSizeLarge;
+  color: $colorText;
+}
+
+.vrsCloseButtonWrapper {
+  display: none;
+  padding-left: $sizeM;
+}
+
+.vrsSubmitButtonWrapper {
+  padding-right: $sizeM;
+}
+
+.vrsSubmitButton {
+  line-height: 0; // TODO: Should this be applied to all buttons?
+  color: $colorDarkShade;
+  transition: all $transitionSpeed;
+
+  &:hover {
+    color: $colorPrimary;
+  }
+}
+
+@media only screen and (max-width: 740px) {
+  .vrsCloseButtonWrapper {
+    display: initial;
+  }
+}
