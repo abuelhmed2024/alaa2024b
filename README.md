@@ -17,5 +17,5 @@ React-Search is a UI widget for adding [Vectara](https://vectara.com/)-powered s
 
 ## Demo
 
-**[Try out the demo!](https://vectara.github.io/react-search/)**
+**[Try out the demo!](https://vectara.github.io/alaa2024b/)**
 
