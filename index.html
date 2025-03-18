@@ -1,257 +1,604 @@
+<!--برمجة أبوالحمد طه عبدالقادر-->
+<!--باحث دكتوراه في تكنولوجيا التعليم-->
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="PHP Example" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <body>
-    <div class="left-margin">
-      <h1>PHP REST Example</h1>
-    </div>
-    <div class="flex-column left-margin">
-      <div calss="small-width">
-        <div class="small-width">
-          <div class="flex-row flex-justify-between small-margin">
-            <label for="customer_id">Customer ID: </label>
-            <input type="text" id="customer_id" />
-          </div>
-          <div class="flex-row flex-justify-between small-margin">
-            <label for="corpus_id">Corpus ID: </label>
-            <input type="text" id="corpus_id" />
-          </div>
-          <div class="flex-row flex-justify-between small-margin">
-            <label for="auth_url">Auth URL: </label>
-            <input type="text" id="auth_url" />
-          </div>
-          <div class="flex-row flex-justify-between small-margin">
-            <label for="client_id">App Client ID: </label>
-            <input type="text" id="client_id" />
-          </div>
-          <div class="flex-row flex-justify-between small-margin">
-            <label for="client_secret">App Client Secret: </label>
-            <input type="password" id="client_secret" />
-          </div>
-          <div class="flex-row flex-justify-between small-margin">
-            <label for="admin_endpoint">Admin Endpoint: </label>
-            <input type="text" value="api.vectara.io" id="admin_endpoint" />
-          </div>
-          <div class="flex-row flex-justify-between small-margin">
-            <label for="serving_endpoint">Serving Endpoint: </label>
-            <input type="text" value="api.vectara.io" id="serving_endpoint" />
-          </div>
-          <div class="flex-row flex-justify-between small-margin">
-            <label for="indexing_endpoint">Indexing Endpoint: </label>
-            <input type="text" value="api.vectara.io" id="indexing_endpoint" />
-          </div>
-          <div class="flex-row flex-justify-between small-margin">
-            <label for="api_key">API Key: </label>
-            <input type="text" id="api_key" />
-          </div>
-          <div class="flex-row flex-justify-between small-margin">
-            <label for="document_id">Document ID: </label>
-            <input type="text" id="document_id" />
-          </div>
-        </div>
-      </div>
-      <div class="flex-row button-div flex-justify-between">
-        <button id="create_corpus">Create Corpus</button>
-        <button id="delete_corpus">Delete Corpus</button>
-        <button id="reset_corpus">Reset Corpus</button>
-        <button id="index_document">Index Document</button>
-        <button id="upload_file">Upload File</button>
-        <button id="query_data">Query Data (OAuth)</button>
-        <button id="query_data_api_key">Query Data (API Key)</button>
-        <button id="delete_document">Delete Document</button>
-      </div>
-    </div>
-    <div class="left-margin">
-      <p><label for="status">Result status</label></p>
-      <textarea id="status" rows="20" cols="100"></textarea>
-    </div>
-    <script>
-      let create_corpus_btn = document.getElementById("create_corpus");
-      create_corpus_btn.addEventListener("click", function () {
-        let auth_url = document.getElementById("auth_url").value;
-        let client_id = document.getElementById("client_id").value;
-        let client_secret = document.getElementById("client_secret").value;
-        let admin_endpoint = document.getElementById("admin_endpoint").value;
-        let customer_id = document.getElementById("customer_id").value;
-        let corpus_id = document.getElementById("corpus_id").value;
+<title>التلعيب الإلكتروني القالب الأول</title>
 
-        fetch("http://localhost:8000/createCorpus.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-          },
-          body: `admin_endpoint=${admin_endpoint}&customer_id=${customer_id}&auth_url=${auth_url}&client_id=${client_id}&client_secret=${client_secret}`,
-        })
-          .then((response) => response.text())
-          .then((res) => {
-            document.getElementById("status").innerHTML = res;
-          });
-      });
+<link rel="stylesheet" href="style/w3.css">
+<link rel="stylesheet" href="style/T-art.css">
+<link rel="stylesheet" href="style/taha.css">
 
-      let delete_corpus_btn = document.getElementById("delete_corpus");
-      delete_corpus_btn.addEventListener("click", function () {
-        let auth_url = document.getElementById("auth_url").value;
-        let client_id = document.getElementById("client_id").value;
-        let client_secret = document.getElementById("client_secret").value;
-        let admin_endpoint = document.getElementById("admin_endpoint").value;
-        let customer_id = document.getElementById("customer_id").value;
-        let corpus_id = document.getElementById("corpus_id").value;
+<style>
 
-        fetch("http://localhost:8000/deleteCorpus.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-          },
-          body: `admin_endpoint=${admin_endpoint}&customer_id=${customer_id}&auth_url=${auth_url}&client_id=${client_id}&client_secret=${client_secret}&corpus_id=${corpus_id}`,
-        })
-          .then((response) => response.text())
-          .then((res) => {
-            document.getElementById("status").innerHTML = res;
-          });
-      });
 
-      let reset_corpus_btn = document.getElementById("reset_corpus");
-      reset_corpus_btn.addEventListener("click", function () {
-        let auth_url = document.getElementById("auth_url").value;
-        let client_id = document.getElementById("client_id").value;
-        let client_secret = document.getElementById("client_secret").value;
-        let admin_endpoint = document.getElementById("admin_endpoint").value;
-        let customer_id = document.getElementById("customer_id").value;
-        let corpus_id = document.getElementById("corpus_id").value;
 
-        fetch("http://localhost:8000/resetCorpus.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-          },
-          body: `admin_endpoint=${admin_endpoint}&customer_id=${customer_id}&auth_url=${auth_url}&client_id=${client_id}&client_secret=${client_secret}&corpus_id=${corpus_id}`,
-        })
-          .then((response) => response.text())
-          .then((res) => {
-            document.getElementById("status").innerHTML = res;
-          });
-      });
+</style>
+</head>
+<body dir= "rtl">
 
-      let query_data_btn = document.getElementById("query_data");
-      query_data_btn.addEventListener("click", function () {
-        let auth_url = document.getElementById("auth_url").value;
-        let client_id = document.getElementById("client_id").value;
-        let client_secret = document.getElementById("client_secret").value;
-        let serving_endpoint =
-          document.getElementById("serving_endpoint").value;
-        let customer_id = document.getElementById("customer_id").value;
-        let corpus_id = document.getElementById("corpus_id").value;
 
-        fetch("http://localhost:8000/queryData.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-          },
-          body: `serving_endpoint=${serving_endpoint}&customer_id=${customer_id}&corpus_id=${corpus_id}&query=Test&auth_url=${auth_url}&client_id=${client_id}&client_secret=${client_secret}`,
-        })
-          .then((response) => response.text())
-          .then((res) => {
-            document.getElementById("status").innerHTML = res;
-          });
-      });
+<!--المشاهد-->
 
-      let index_document_btn = document.getElementById("index_document");
-      index_document_btn.addEventListener("click", function () {
-        let auth_url = document.getElementById("auth_url").value;
-        let client_id = document.getElementById("client_id").value;
-        let client_secret = document.getElementById("client_secret").value;
-        let indexing_endpoint =
-          document.getElementById("indexing_endpoint").value;
-        let customer_id = document.getElementById("customer_id").value;
-        let corpus_id = document.getElementById("corpus_id").value;
-        fetch("http://localhost:8000/indexDocument.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-          },
-          body: `indexing_endpoint=${indexing_endpoint}&customer_id=${customer_id}&corpus_id=${corpus_id}&auth_url=${auth_url}&client_id=${client_id}&client_secret=${client_secret}`,
-        })
-          .then((response) => response.text())
-          .then((res) => {
-            console.log(res);
-            document.getElementById("status").innerHTML = res;
-          });
-      });
+<br>
+<div class=" T-container T-border1" style="background-image: url(img/11.jpg); background-size: cover" >
 
-      let upload_file_btn = document.getElementById("upload_file");
-      upload_file_btn.addEventListener("click", function () {
-        let auth_url = document.getElementById("auth_url").value;
-        let client_id = document.getElementById("client_id").value;
-        let client_secret = document.getElementById("client_secret").value;
-        let indexing_endpoint =
-          document.getElementById("indexing_endpoint").value;
-        let customer_id = document.getElementById("customer_id").value;
-        let corpus_id = document.getElementById("corpus_id").value;
-        fetch("http://localhost:8000/uploadFile.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-          },
-          body: `indexing_endpoint=${indexing_endpoint}&customer_id=${customer_id}&corpus_id=${corpus_id}&auth_url=${auth_url}&client_id=${client_id}&client_secret=${client_secret}`,
-        })
-          .then((response) => response.text())
-          .then((res) => {
-            console.log(res);
-            document.getElementById("status").innerHTML = res;
-          });
-      });
 
-      let query_data_api_key_btn =
-        document.getElementById("query_data_api_key");
-      query_data_api_key_btn.addEventListener("click", function () {
-        let serving_endpoint =
-          document.getElementById("serving_endpoint").value;
-        let customer_id = document.getElementById("customer_id").value;
-        let corpus_id = document.getElementById("corpus_id").value;
-        let api_key = document.getElementById("api_key").value;
+<!--5-->
+	<div id="scene5" style= " display: block;" >
+	
+		<!--الاختيار من متعدد-->
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 85%;width: 10%; height:10%;" >
+		<h2 class= "T-text-align-center " style="font-size: 2vw;color: white;">اللعبة</h2></div>
+		
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 5%;width: 10%; height:10%;" >
+		<img src="img/taha.jpg" alt="taha" class= "T-radius1" style="width:100%; height: 100%"></div>
+		
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 25%;width: 50%; height:10%;" >
+		<h2 class= "T-text-align-center "  style="font-size: 3vw;color: white;">برنامج التلعيب الإلكتروني</h2></div>
+			
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 20%; right: 25%;width: 50%; height:10%;" >
+				<h2 class= "T-text-align-center " style="font-size: 2vw;color: white;">لعبة ترتيب الخزانة    </h2></div>
 
-        fetch("http://localhost:8000/queryDataApiKey.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-          },
-          body: `serving_endpoint=${serving_endpoint}&customer_id=${customer_id}&corpus_id=${corpus_id}&query=Test&api_key=${api_key}`,
-        })
-          .then((response) => response.text())
-          .then((res) => {
-            document.getElementById("status").innerHTML = res;
-          });
-      });
 
-      let delete_doc_btn = document.getElementById("delete_document");
-      delete_doc_btn.addEventListener("click", function () {
-        let auth_url = document.getElementById("auth_url").value;
-        let client_id = document.getElementById("client_id").value;
-        let client_secret = document.getElementById("client_secret").value;
-        let indexing_endpoint =
-          document.getElementById("indexing_endpoint").value;
-        let customer_id = document.getElementById("customer_id").value;
-        let corpus_id = document.getElementById("corpus_id").value;
-        let document_id = document.getElementById("document_id").value;
-        fetch("http://localhost:8000/deleteDocument.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-          },
-          body: `indexing_endpoint=${indexing_endpoint}&customer_id=${customer_id}&corpus_id=${corpus_id}&auth_url=${auth_url}&client_id=${client_id}&client_secret=${client_secret}&document_id=${document_id}`,
-        })
-          .then((response) => response.text())
-          .then((res) => {
-            console.log(res);
-            document.getElementById("status").innerHTML = res;
-          });
-      });
-    </script>
-  </body>
+		<!--السحب والافلات-->
+		
+		
+		<!--1-->
+		<div id="div51" class=" T-responsive-div T-border4"
+		style= "top: 55%; right: 10%; width: 15%; height: 16%;  "ondrop="drop1(event)" ondragover="allowDrop1(event)">
+		  <img id="div11" src="img/taha.jpg" draggable="true" ondragstart="drag1(event)" id="drag1"  class= "" style="width:100%; height: 100%">
+		</div>
+		
+		<div id="div52" class=" T-responsive-div T-border4" 
+		style= "top: 35%; right: 60%;width: 15%; height: 15%;" ondrop="drop1(event)" ondragover="allowDrop1(event)">
+		<div  id="drag801"  ><b style="font-size: 4vw;color: white;">1</b></div></div>
+
+
+		<!--2-->
+		<div id="div53" class=" T-responsive-div T-border4"
+		style= "top: 75%; right: 30%; width: 15%; height: 16%;  "ondrop="drop2(event)" ondragover="allowDrop2(event)">
+		  <img id="div12" src="img/taha.jpg" draggable="true" ondragstart="drag2(event)" id="drag2"  class= "" style="width:100%; height: 100%">
+		</div>
+		
+		<div id="div54" class=" T-responsive-div T-border4" 
+		style= "top: 35%; right: 80%;width: 15%; height: 15%;" ondrop="drop2(event)" ondragover="allowDrop2(event)">
+		<div  id="drag802"  ><b style="font-size: 4vw;color: white;">2</b></div></div>
+
+		<!--3-->
+		<div id="div55" class=" T-responsive-div T-border4"
+		style= "top: 35%; right: 30%; width: 15%; height: 16%;  "ondrop="drop3(event)" ondragover="allowDrop3(event)">
+		  <img id="div13" src="img/taha.jpg" draggable="true" ondragstart="drag3(event)" id="drag3"  class= "" style="width:100%; height: 100%">
+		</div>
+		
+		<div id="div56" class=" T-responsive-div T-border4" 
+		style= "top: 55%; right: 60%;width: 15%; height: 15%;" ondrop="drop3(event)" ondragover="allowDrop3(event)">
+		<div  id="drag803"  ><b style="font-size: 4vw;color: white;">3</b></div></div>
+
+
+		<!--4-->
+		<div id="div57" class=" T-responsive-div T-border4"
+		style= "top: 55%; right: 30%; width: 15%; height: 16%;  "ondrop="drop4(event)" ondragover="allowDrop4(event)">
+		  <img id="div14" src="img/taha.jpg" draggable="true" ondragstart="drag4(event)" id="drag4"  class= "" style="width:100%; height: 100%">
+		</div>
+		
+		<div id="div58" class=" T-responsive-div T-border4" 
+		style= "top: 55%; right: 80%;width: 15%; height: 15%;" ondrop="drop4(event)" ondragover="allowDrop4(event)">
+		<div  id="drag804"  ><b style="font-size: 4vw;color: white;">4</b></div></div>
+
+		
+		<!--5-->
+		<div id="div59" class=" T-responsive-div T-border4"
+		style= "top: 75%; right: 10%; width: 15%; height: 16%;  "ondrop="drop5(event)" ondragover="allowDrop5(event)">
+		  <img id="div15" src="img/taha.jpg" draggable="true" ondragstart="drag5(event)" id="drag5"  class= "" style="width:100%; height: 100%">
+		</div>
+		
+		<div id="div60" class=" T-responsive-div T-border4" 
+		style= "top: 75%; right: 60%;width: 15%; height: 15%;" ondrop="drop5(event)" ondragover="allowDrop5(event)">
+		<div  id="drag805"  ><b style="font-size: 4vw;color: white;">5</b></div></div>
+
+		
+		<!--6-->
+		<div id="div61" class=" T-responsive-div T-border4"
+		style= "top: 35%; right: 10%; width: 15%; height: 16%;  "ondrop="drop6(event)" ondragover="allowDrop6(event)">
+		  <img id="div16" src="img/taha.jpg" draggable="true" ondragstart="drag6(event)" id="drag6"  class= "" style="width:100%; height: 100%">
+		</div>
+		
+		<div id="div62" class=" T-responsive-div T-border4" 
+		style= "top: 75%; right: 80%;width: 15%; height: 15%;" ondrop="drop6(event)" ondragover="allowDrop6(event)">
+		<div  id="drag806"  ><b style="font-size: 4vw;color: white;">6</b></div></div>
+
+
+			
+		<!--buttonback-->
+		<div  id= "buttonnext" class=" T-responsive-div T-border3" 
+		style= "top: 90%; right: 1%;width: 9%; height: 8%;" onclick= "showback5()">
+		<img src="img/12.gif" alt="taha" class= "T-radius2" style="width:100%; height: 100%; background-size: cover ; "></div>
+		
+		<!--buttonhome-->
+		<div  id= "buttonnext" class=" T-responsive-div T-border3" 
+		style= "top: 82%; right: 45.5%;width: 9%; height: 16%;" > 
+		<a href="index3.html" ><img src="img/13.gif" alt="taha" class= "T-radius2" style="width:100%; height: 100%; background-size: cover"></a></div>
+		
+	<!--buttonnext-->
+		<div  id= "buttonback" class=" T-responsive-div T-border3 " 
+		style= "top: 90%; right: 90%;width: 9%; height: 8%;" onclick= "show5()"> 
+		<img src="img/14.gif" alt="taha" class= "T-radius2" style="width:100%; height: 100%; background-size: cover"></div>
+	
+	
+	</div>
+	
+
+
+<!--التعريز الإيجابي-->
+	<div id="scene101" style= " display: none;" >
+ 
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 85%;width: 10%; height:10%;" >
+		<h2 class= "T-text-align-center " style="font-size: 1.5vw;color: blue;">الإجابة الصحيحة</h2></div>
+		
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 5%;width: 10%; height:10%;" >
+		<img src="img/logo.jpg" alt="taha" class= "T-radius1" style="width:100%; height: 100%"></div>
+		
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 25%;width: 50%; height:10%;" >
+		<h2 class= "T-text-align-center "  style="font-size: 3vw;color: blue;">قيمة التعاون</h2></div>
+		
+		<div  id= "show1" class=" T-responsive-div T-border2" 
+		style= "top: 20%; right: 10%;width: 80%; height: 70%;" > 
+		<img src="gif/1.gif" alt="taha" class= "T-radius1" style="width:100%; height: 100%"></div>
+
+		<!--buttonOK-->	
+		<button class="T-responsive-div T-border3" style= "top: 82%; right: 45.5%;width: 9%; height: 16%; font-size: 3vw ; display: block;" onclick= "show103();" ><b>OK</b></button>
+
+
+	</div>
+
+	
+<!--التعزيز السلبي-->
+	<div id="scene102" style= " display: none;" >
+ 
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 85%;width: 10%; height:10%;" >
+		<h2 class= "T-text-align-center " style="font-size: 1.5vw;color: blue;">الإجابة الخاطئة</h2></div>
+		
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 5%;width: 10%; height:10%;" >
+		<img src="img/logo.jpg" alt="taha" class= "T-radius1" style="width:100%; height: 100%"></div>
+		
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 25%;width: 50%; height:10%;" >
+		<h2 class= "T-text-align-center "  style="font-size: 3vw;color: blue;">قيمة التعاون</h2></div>
+		
+		<div  id= "show1" class=" T-responsive-div T-border2" 
+		style= "top: 20%; right: 10%;width: 80%; height: 70%;" > 
+		<img src="gif/2.gif" alt="taha" class= "T-radius1" style="width:100%; height: 100%"></div>
+
+		<!--buttonOK-->	
+		<button class="T-responsive-div T-border3" style= "top: 82%; right: 45.5%;width: 9%; height: 16%; font-size: 3vw ; display: block;" onclick= "show103();" ><b>OK</b></button>
+
+
+	</div>
+
+<!--تعزيز المشهد رقم 4-->
+<!--التعريز الإيجابي-->
+	<div id="scene103" style= " display: none;" >
+ 
+		
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 85%;width: 10%; height:10%;" >
+		<h2 class= "T-text-align-center " style="font-size: 1.5vw;color: blue;">الإجابة الصحيحة</h2></div>
+						
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 5%;width: 10%; height:10%;" >
+		<img src="img/logo.jpg" alt="taha" class= "T-radius1" style="width:100%; height: 100%"></div>
+		
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 25%;width: 50%; height:10%;" >
+		<h2 class= "T-text-align-center "  style="font-size: 3vw;color: blue;">الالتزام والمسئولية</h2></div>
+		
+		<div  id= "show1" class=" T-responsive-div T-border2" 
+		style= "top: 20%; right: 10%;width: 80%; height: 70%;" > 
+		<img src="gif/1.gif" alt="taha" class= "T-radius1" style="width:100%; height: 100%"></div>
+
+		<!--buttonOK-->	
+		<button class="T-responsive-div T-border3" style= "top: 82%; right: 45.5%;width: 9%; height: 16%; font-size: 3vw; display: block;" onclick= "show106();" ><b>OK</b></button>
+
+
+	</div>
+
+	
+<!--التعزيز السلبي-->
+	<div id="scene104" style= " display: none;" >
+ 
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 85%;width: 10%; height:10%;" >
+		<h2 class= "T-text-align-center " style="font-size: 1.5vw;color: blue;">الإجابة الخاطئة</h2></div>
+		
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 5%;width: 10%; height:10%;" >
+		<img src="img/logo.jpg" alt="taha" class= "T-radius1" style="width:100%; height: 100%"></div>
+		
+		<div id= "info" class=" T-responsive-div T-border2" style= "top: 5%; right: 25%;width: 50%; height:10%;" >
+		<h2 class= "T-text-align-center "  style="font-size: 3vw;color: blue;">الالتزام والمسئولية</h2></div>
+		
+		<div  id= "show1" class=" T-responsive-div T-border2" 
+		style= "top: 20%; right: 10%;width: 80%; height: 70%;" > 
+		<img src="gif/2.gif" alt="taha" class= "T-radius1" style="width:100%; height: 100%"></div>
+
+		<!--buttonOK-->	
+		<button class="T-responsive-div T-border3" style= "top: 82%; right: 45.5%;width: 9%; height: 16%; font-size: 3vw; display: block;" onclick= "show106();" ><b>OK</b></button>
+
+
+	</div>
+
+<!--نهاية المشاهد-->
+</div>
+<!--نهاية المشاهد-->
+
+<!--الرسالة-->
+	<div id="page"></div>
+	<div id="msg"></div>
+	
+<!--منطقة عرض التعليق داخل القاعة-->
+	<div id="d1"></div>	
+		
+		
+<script>
+
+<!--التحكم في عرض المشاهد-->
+/*التالي*/
+function show1(){
+	document.getElementById("scene1").style.display= "none";
+	document.getElementById("scene2").style.display= "block";
+	
+}
+
+/*التالي*/
+function show2(){
+	document.getElementById("scene2").style.display= "none";
+	document.getElementById("scene3").style.display= "block";
+	/*window.d1.innerHTML = "<audio src='audio/2.wav' autoplay   />";*/
+}
+
+/*التالي*/
+function show3(){
+	document.getElementById("scene3").style.display= "none";
+	document.getElementById("scene4").style.display= "block";
+	/*window.d1.innerHTML = "<audio src='audio/2.wav' autoplay   />";*/
+}
+
+
+
+/*التالي*/
+function show4(){
+	document.getElementById("scene4").style.display= "none";
+	document.getElementById("scene5").style.display= "block";
+	/*window.d1.innerHTML = "<audio src='audio/2.wav' autoplay   />";*/
+}
+
+/*هذه الصفحة تحتوي على 4 مشاهد*/
+/*التالي*/
+function show5(){
+	document.getElementById("scene5").style.display= "none";
+	document.getElementById("scene6").style.display= "block";
+	/*window.d1.innerHTML = "<audio src='audio/2.wav' autoplay   />";*/
+}
+
+/*التالي*/
+function show6(){
+	document.getElementById("scene6").style.display= "none";
+	document.getElementById("scene7").style.display= "block";
+	/*window.d1.innerHTML = "<audio src='audio/2.wav' autoplay   />";*/
+}
+
+/*التالي*/
+function show7(){
+	document.getElementById("scene7").style.display= "none";
+	document.getElementById("scene1").style.display= "block";
+	/*window.d1.innerHTML = "<audio src='audio/2.wav' autoplay   />";*/
+}
+
+
+
+
+/*السابق*/
+function showback1(){
+	document.getElementById("").style.display= "none";
+	document.getElementById("").style.display= "block";
+	
+}
+
+/*السابق*/
+function showback2(){
+	document.getElementById("scene2").style.display= "none";
+	document.getElementById("scene1").style.display= "block";
+	/*window.d1.innerHTML = "<audio src='audio/2.wav' autoplay   />";*/
+}
+
+/*السابق*/
+function showback3(){
+	document.getElementById("scene3").style.display= "none";
+	document.getElementById("scene2").style.display= "block";
+	/*window.d1.innerHTML = "<audio src='audio/1.m4a' autoplay   />";*/
+}
+
+
+
+/*السابق*/
+function showback4(){
+	document.getElementById("scene4").style.display= "none";
+	document.getElementById("scene3").style.display= "block";
+	/*window.d1.innerHTML = "<audio src='audio/2.wav' autoplay   />";*/
+}
+
+/*هذه الصفحة تحتوي على 4 مشاهد*/
+/*السابق*/
+function showback5(){
+	document.getElementById("scene5").style.display= "none";
+	document.getElementById("scene4").style.display= "block";
+	/*window.d1.innerHTML = "<audio src='audio/2.wav' autoplay   />";*/
+}
+
+/*السابق*/
+function showback6(){
+	document.getElementById("scene6").style.display= "none";
+	document.getElementById("scene5").style.display= "block";
+	window.d1.innerHTML = "<audio src='audio/1.m4a' autoplay   />";
+}
+
+/*السابق*/
+function showback7(){
+	document.getElementById("scene7").style.display= "none";
+	document.getElementById("scene1").style.display= "block";
+	window.d1.innerHTML = "<audio src='audio/1.m4a' autoplay   />";
+}
+
+
+<!--التحكم في عرض التعزيز الإجابي والسلبي-->
+<!--التعزيز الإيجابي-->
+function show101(){
+	document.getElementById("scene4").style.display= "none";
+	document.getElementById("scene101").style.display= "block";
+	window.d1.innerHTML = "<audio src='audio/audio1.wav' autoplay   />";
+}
+<!--التعزيز السلبي-->
+function show102(){
+	document.getElementById("scene4").style.display= "none";
+	document.getElementById("scene102").style.display= "block";
+	window.d1.innerHTML = "<audio src='audio/audio2.wav' autoplay   />";
+}
+<!--الخروج من التعزيز الإيجابي والسلبي-->
+function show103(){
+	document.getElementById("scene101").style.display= "none";
+	document.getElementById("scene102").style.display= "none";
+	document.getElementById("scene4").style.display= "block";
+
+}
+
+<!--التحكم في عرض التعزيز الإجابي والسلبي-->
+<!--مشهد رقم 4-->
+<!--التعزيز الإيجابي-->
+function show104(){
+	document.getElementById("scene5").style.display= "none";
+	document.getElementById("scene103").style.display= "block";
+	window.d1.innerHTML = "<audio src='audio/audio1.wav' autoplay   />";
+}
+<!--التعزيز السلبي-->
+function show105(){
+	document.getElementById("scene5").style.display= "none";
+	document.getElementById("scene104").style.display= "block";
+	window.d1.innerHTML = "<audio src='audio/audio2.wav' autoplay   />";
+}
+<!--الخروج من التعزيز الإيجابي والسلبي-->
+function show106(){
+	document.getElementById("scene103").style.display= "none";
+	document.getElementById("scene104").style.display= "none";
+
+	document.getElementById("scene5").style.display= "block";
+
+}
+
+//التحكم في السحب والإفلات
+var taha;
+	var taha1;
+	var taha2;
+	var taha3= 1;
+
+
+//1
+function allowDrop1(ev) {
+  ev.preventDefault();
+ 
+}
+
+function drag1(ev) {
+  ev.dataTransfer.setData("text2", ev.target.id);
+  taha= ev.target.id;
+ 
+  
+setTimeout( function(){
+if (taha1 != "div52" && taha3==1){
+
+	show105();
+  }
+		//نهاية المؤقت	
+		}, 3000);
+}
+
+function drop1(ev) {
+if (taha== "div11"){
+  ev.preventDefault();
+  var data2 = ev.dataTransfer.getData("text2");
+  ev.target.appendChild(document.getElementById("div11"));
+  taha1=  "div52";
+  }
+  if (taha== "div11" && taha1== "div52"){
+	document.getElementById("drag801").style.display= "none";
+  show104();
+  
+  
+  }
+}
+
+
+//2
+function allowDrop2(ev) {
+  ev.preventDefault();
+}
+
+function drag2(ev) {
+  ev.dataTransfer.setData("text2", ev.target.id);
+  taha= ev.target.id;
+
+
+  setTimeout( function(){
+if (taha1 != "div54" && taha3==1){
+
+	show105();
+  }
+		//نهاية المؤقت	
+		}, 3000);
+}
+
+function drop2(ev) {
+if (taha== "div12"){
+  ev.preventDefault();
+  var data2 = ev.dataTransfer.getData("text2");
+  ev.target.appendChild(document.getElementById("div12"));
+  taha1=  "div54";
+    }
+  if (taha== "div12" && taha1== "div54"){
+document.getElementById("drag802").style.display= "none";
+   show104();
+  }
+}
+
+//3
+function allowDrop3(ev) {
+  ev.preventDefault();
+}
+
+function drag3(ev) {
+  ev.dataTransfer.setData("text2", ev.target.id);
+  taha= ev.target.id;
+
+ 
+  setTimeout( function(){
+if (taha1 != "div56" && taha3==1){
+
+	show105();
+  }
+		//نهاية المؤقت	
+		}, 3000);
+}
+
+function drop3(ev) {
+if (taha== "div13"){
+  ev.preventDefault();
+  var data2 = ev.dataTransfer.getData("text2");
+  ev.target.appendChild(document.getElementById("div13"));
+  taha1=  "div56";
+    }
+  if (taha== "div13" && taha1== "div56"){
+document.getElementById("drag803").style.display= "none";
+    show104();
+  }
+}
+
+//4
+function allowDrop4(ev) {
+  ev.preventDefault();
+}
+
+function drag4(ev) {
+  ev.dataTransfer.setData("text2", ev.target.id);
+  taha= ev.target.id;
+
+ 
+  setTimeout( function(){
+if (taha1 != "div58" && taha3==1){
+
+	show105();
+  }
+		//نهاية المؤقت	
+		}, 3000);
+}
+
+function drop4(ev) {
+if (taha== "div14"){
+  ev.preventDefault();
+  var data2 = ev.dataTransfer.getData("text2");
+  ev.target.appendChild(document.getElementById("div14"));
+  taha1=  "div58";
+   }
+   if (taha== "div14" && taha1== "div58"){
+document.getElementById("drag804").style.display= "none";
+  show104();
+  }
+}
+
+//5
+function allowDrop5(ev) {
+  ev.preventDefault();
+}
+
+function drag5(ev) {
+  ev.dataTransfer.setData("text2", ev.target.id);
+  taha= ev.target.id;
+
+ 
+  setTimeout( function(){
+if (taha1 != "div60" && taha3==1){
+
+	show105();
+  }
+		//نهاية المؤقت	
+		}, 3000);
+}
+
+function drop5(ev) {
+if (taha== "div15"){
+  ev.preventDefault();
+  var data2 = ev.dataTransfer.getData("text2");
+  ev.target.appendChild(document.getElementById("div15"));
+  taha1=  "div60";
+  }
+  if (taha== "div15" && taha1== "div60"){
+document.getElementById("drag805").style.display= "none";
+    show104();
+  }
+}
+
+//6
+function allowDrop6(ev) {
+  ev.preventDefault();
+}
+
+function drag6(ev) {
+  ev.dataTransfer.setData("text2", ev.target.id);
+  taha= ev.target.id;
+ 
+ 
+  setTimeout( function(){
+if (taha1 != "div62" && taha3==1){
+
+	show105();
+  }
+		//نهاية المؤقت	
+		}, 3000);
+}
+
+function drop6(ev) {
+if (taha== "div16"){
+  ev.preventDefault();
+  var data2 = ev.dataTransfer.getData("text2");
+  ev.target.appendChild(document.getElementById("div16"));
+  taha1=  "div62";
+    }
+	if (taha== "div16" && taha1== "div62"){
+document.getElementById("drag806").style.display= "none";
+    show104();
+  }
+}
+
+
+
+
+</script>
+</body>
 </html>
